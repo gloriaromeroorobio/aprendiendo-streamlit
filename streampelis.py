@@ -53,7 +53,7 @@ plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
 plt.show()
 
-"""num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
+num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
 num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
 
 indices = np.linspace(0, 1, num_points)
@@ -77,4 +77,4 @@ st.altair_chart(alt.Chart(df, height=700, width=700)
         y=alt.Y("y", axis=None),
         color=alt.Color("idx", legend=None, scale=alt.Scale()),
         size=alt.Size("rand", legend=None, scale=alt.Scale(range=[1, 150])),
-    ))"""
+    ))
