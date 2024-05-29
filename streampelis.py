@@ -1,4 +1,4 @@
-import altair as alt
+simport altair as alt
 import numpy as np
 import pandas as pd
 import streamlit as st
@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 # Cargar los datos
 @st.cache
 def load_data():
-    data = pd.read_csv('path_to_your_file.csv')
+    data = pd.read_csv('pelis.csv')
     return data
 
 data = load_data()
