@@ -37,3 +37,29 @@ ax.set_ylabel('Total Revenue (Millions)')
 plt.xticks(rotation=45)
 ax.grid(axis='y', linestyle='--', alpha=0.7)
 st.pyplot(fig)
+
+#otro ejemplo
+data = load_data()
+
+# Sidebar: Filtros
+st.sidebar.header('Filtros')
+rank = st.sidebar.slider('Rank', int(data['Rank'].min()), int(data['Rank'].max()), (int(data['Rank'].min()), int(data['Rank'].max())))
+year = st.sidebar.slider('Year', int(data['Year'].min()), int(data['Year'].max()), (int(data['Year'].min()), int(data['Year'].max())))
+votes = st.sidebar.slider('Votes', int(data['Votes'].min()), int(data['Votes'].max()), (int(data['Votes'].min()), int(data['Votes'].max())))
+revenue = st.sidebar.slider('Revenue (Millions)', float(data['Revenue (Millions)'].min()), float(data['Revenue (Millions)'].max()), (float(data['Revenue (Millions)'].min()), float(data['Revenue (Millions)'].max())))
+
+# Filtrar datos
+filtered_data = data[(data['Rank'] >= rank[0]) & (data['Rank'] <= rank[1]) & 
+                     (data['Year'] >= year[0]) & (data['Year'] <= year[1]) & 
+                     (data['Votes'] >= votes[0]) & (data['Votes'] <= votes[1]) & 
+                     (data['Revenue (Millions)'] >= revenue[0]) & (data['Revenue (Millions)'] <= revenue[1])]
+
+# Gráfico de dispersión
+fig, ax = plt.subplots(figsize=(12, 6))
+scatter = ax.scatter(x=filtered_data['Votes'], y=filtered_data['Revenue (Millions)'],
+                     c=filtered_data['Rank'], cmap='viridis', alpha=0.6)
+plt.colorbar(scatter, label='Rank')
+ax.set_title('Votes vs Revenue by Rank of Movies')
+ax.set_xlabel('Votes')
+ax.set_ylabel('Revenue (Millions)')
+st.pyplot(fig)
