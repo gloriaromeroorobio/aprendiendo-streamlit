@@ -25,11 +25,16 @@ filtered_data = data[(data['Rank'] <= rank) &
                      (data['Votes'] <= votes) & 
                      (data['Revenue (Millions)'] <= revenue)]
 
-# Gráfico de barras de películas por año
-fig, ax = plt.subplots()
-filtered_data['Year'].value_counts().sort_index().plot(kind='bar', ax=ax)
-ax.set_title('Número de Películas por Año')
-ax.set_xlabel('Año')
-ax.set_ylabel('Número de Películas')
+# Grouping data by 'Year' and summing 'Revenue (Millions)' for each year
+yearly_revenue = filtered_data.groupby('Year')['Revenue (Millions)'].sum()
 
-st.pyplot(fig)
+# Plotting the bar chart
+plt.figure(figsize=(12, 6))
+yearly_revenue.plot(kind='bar', color='skyblue')
+plt.title('Total Revenue of Movies by Year (in Millions)')
+plt.xlabel('Year')
+plt.ylabel('Total Revenue (Millions)')
+plt.xticks(rotation=45)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.show()
