@@ -4,23 +4,10 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 
-"""
-# Welcome to Streamlit!
-
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:.
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
-
-In the meantime, below is an example of what you can do with just a few lines of code:
-"""
-import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-
 # Cargar los datos
 @st.cache
 def load_data():
-    data = pd.read_csv('pelis.csv')
+    data = pd.read_csv('path_to_your_file.csv')
     return data
 
 data = load_data()
@@ -38,4 +25,11 @@ filtered_data = data[(data['Rank'] <= rank) &
                      (data['Votes'] <= votes) & 
                      (data['Revenue (Millions)'] <= revenue)]
 
+# Gráfico de barras de películas por año
+fig, ax = plt.subplots()
+filtered_data['Year'].value_counts().sort_index().plot(kind='bar', ax=ax)
+ax.set_title('Número de Películas por Año')
+ax.set_xlabel('Año')
+ax.set_ylabel('Número de Películas')
 
+st.pyplot(fig)
